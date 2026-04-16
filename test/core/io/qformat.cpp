@@ -268,3 +268,31 @@ TEST_CASE("qformat formatter-qrectf", "[qformat]")
    REQUIRE(outputC == "Show QRectF values with stars: **[5.3, 10.91, 100.59, 150.01]");
 }
 
+TEST_CASE("qformat formatter-qpoint", "[qformat]")
+{
+   QPoint pt(58, 32);
+
+   std::string outputA = std::format("Values for QPoint are: {}", pt);
+   REQUIRE(outputA == "Values for QPoint are: [58, 32]");
+
+   QString outputB = formatToQString("Values for QPoint are: {}", pt);
+   REQUIRE(outputB == "Values for QPoint are: [58, 32]");
+
+   QString outputC = formatToQString("Show QPoint values with padding: {:>15}", pt);
+   REQUIRE(outputC == "Show QPoint values with padding:        [58, 32]");
+}
+
+TEST_CASE("qformat formatter-qpointf", "[qformat]")
+{
+   QPointF pt(58.99, 32.26);
+
+   std::string outputA = std::format("Values for QPointF are: {}", pt);
+   REQUIRE(outputA == "Values for QPointF are: [58.99, 32.26]");
+
+   QString outputB = formatToQString("Values for QPointF are: {}", pt);
+   REQUIRE(outputB == "Values for QPointF are: [58.99, 32.26]");
+
+   QString outputC = formatToQString("Show QPointF values with padding: {:>20}", pt);
+   REQUIRE(outputC == "Show QPointF values with padding:       [58.99, 32.26]");
+}
+
