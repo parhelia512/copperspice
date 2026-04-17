@@ -31,6 +31,7 @@
 #include <qpair.h>
 #include <qpoint.h>
 #include <qrect.h>
+#include <qsize.h>
 #include <qstring.h>
 
 #include <format>
@@ -156,6 +157,28 @@ struct std::formatter<QPointF> : std::formatter<std::string>
    template<typename Context>
    auto format(const QPointF &pt, Context &ctx) const {
       std::string output = std::format("[{}, {}]", pt.x(), pt.y());
+      return std::formatter<std::string>::format(output, ctx);
+   }
+};
+
+template<>
+struct std::formatter<QSize> : std::formatter<std::string>
+{
+   // format data, delegate formatting to the base class
+   template<typename Context>
+   auto format(const QSize &size, Context &ctx) const {
+      std::string output = std::format("[{}, {}]", size.width(), size.height());
+      return std::formatter<std::string>::format(output, ctx);
+   }
+};
+
+template<>
+struct std::formatter<QSizeF> : std::formatter<std::string>
+{
+   // format data, delegate formatting to the base class
+   template<typename Context>
+   auto format(const QSizeF &size, Context &ctx) const {
+      std::string output = std::format("[{}, {}]", size.width(), size.height());
       return std::formatter<std::string>::format(output, ctx);
    }
 };
