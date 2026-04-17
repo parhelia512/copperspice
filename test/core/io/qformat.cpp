@@ -296,3 +296,31 @@ TEST_CASE("qformat formatter-qpointf", "[qformat]")
    REQUIRE(outputC == "Show QPointF values with padding:       [58.99, 32.26]");
 }
 
+TEST_CASE("qformat formatter-qsize", "[qformat]")
+{
+   QSize size(23, 71);
+
+   std::string outputA = std::format("Values for QSize are: {}", size);
+   REQUIRE(outputA == "Values for QSize are: [23, 71]");
+
+   QString outputB = formatToQString("Values for QSize are: {}", size);
+   REQUIRE(outputB == "Values for QSize are: [23, 71]");
+
+   QString outputC = formatToQString("Show QSize values with padding: {:>15}", size);
+   REQUIRE(outputC == "Show QSize values with padding:        [23, 71]");
+}
+
+TEST_CASE("qformat formatter-qsizef", "[qformat]")
+{
+   QSizeF size(52.18, 44.83);
+
+   std::string outputA = std::format("Values for QSizeF are: {}", size);
+   REQUIRE(outputA == "Values for QSizeF are: [52.18, 44.83]");
+
+   QString outputB = formatToQString("Values for QSizeF are: {}", size);
+   REQUIRE(outputB == "Values for QSizeF are: [52.18, 44.83]");
+
+   QString outputC = formatToQString("Show QSizeF values with padding: {:>20}", size);
+   REQUIRE(outputC == "Show QSizeF values with padding:       [52.18, 44.83]");
+}
+
