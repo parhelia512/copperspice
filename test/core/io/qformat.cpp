@@ -182,6 +182,19 @@ TEST_CASE("qformat formatter-qpair", "[qformat]")
 
    QString outputC2 = formatToQString("Show QPair values with padding: {:#>15}", pair_B);
    REQUIRE(outputC2 == "Show QPair values with padding: ####[apple, 37]");
+
+   // C
+   QLine line(18, 5, 106, 82);
+   QPair<double, QLine> pair_C(3.1415, line);
+
+   std::string outputA3 = std::format("Values for QPair are: {}", pair_C);
+   REQUIRE(outputA3 == "Values for QPair are: [3.1415, [18, 5, 106, 82]]");
+
+   QString outputB3 = formatToQString("Values for QPair are: {}", pair_C);
+   REQUIRE(outputB3 == "Values for QPair are: [3.1415, [18, 5, 106, 82]]");
+
+   QString outputC3 = formatToQString("Show QPair values with padding: {:>30}", pair_C);
+   REQUIRE(outputC3 == "Show QPair values with padding:     [3.1415, [18, 5, 106, 82]]");
 }
 
 // tools
