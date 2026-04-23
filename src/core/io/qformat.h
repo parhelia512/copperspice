@@ -26,6 +26,7 @@
 
 #include <qbytearray.h>
 #include <qdebug.h>
+#include <qlist.h>
 #include <qline.h>
 #include <qmargins.h>
 #include <qpair.h>
@@ -38,6 +39,39 @@
 #include <stdio.h>
 
 // specializations for specific custom data types
+
+// containers
+template<typename T>
+struct std::formatter<QList<T>> : std::formatter<std::string>
+{
+   // format data, delegate formatting to the base class
+   template<typename Context>
+   auto format(const QList<T> &list, Context &ctx) const {
+
+      bool first = true;
+
+      std::string output;
+      output.append("[");
+
+      for (const auto &item : list) {
+
+         if (first) {
+            first = false;
+
+         } else {
+            output.append(", ");
+
+         }
+
+         output += std::format("{}", item);
+      }
+
+      output.append("]");
+
+      return std::formatter<std::string>::format(output, ctx);
+   }
+};
+
 
 // string types
 template<>
