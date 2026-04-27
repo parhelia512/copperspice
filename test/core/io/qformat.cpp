@@ -239,6 +239,47 @@ TEST_CASE("qformat formatter-qpair", "[qformat]")
    REQUIRE(outputC3 == "Show QPair values with padding:     [3.1415, [18, 5, 106, 82]]");
 }
 
+TEST_CASE("qformat formatter-qvector", "[qformat]")
+{
+   // A
+   QVector vector_A{1, 52, 18, 6};
+
+   std::string outputA1 = std::format("Values for QVector are: {}", vector_A);
+   REQUIRE(outputA1 == "Values for QVector are: [1, 52, 18, 6]");
+
+   QString outputB1 = formatToQString("Values for QVector are: {}", vector_A);
+   REQUIRE(outputB1 == "Values for QVector are: [1, 52, 18, 6]");
+
+   QString outputC1 = formatToQString("Show QVector values with padding: {:>20}", vector_A);
+   REQUIRE(outputC1 == "Show QVector values with padding:       [1, 52, 18, 6]");
+
+
+   // B
+   QVector<QString> vector_B{ "watermelon", "apple", "pear", "grapefruit" };
+
+   std::string outputA2 = std::format("Values for QVector are: {}", vector_B);
+   REQUIRE(outputA2 == "Values for QVector are: [watermelon, apple, pear, grapefruit]");
+
+   QString outputB2 = formatToQString("Values for QVector are: {}", vector_B);
+   REQUIRE(outputB2 == "Values for QVector are: [watermelon, apple, pear, grapefruit]");
+
+   QString outputC2 = formatToQString("Show QVector values with padding: {:>30}", vector_B);
+   REQUIRE(outputC2 == "Show QVector values with padding: [watermelon, apple, pear, grapefruit]");
+
+
+   // C
+   QVector<float> vector_C{ 80.69, 9.256, 23.4257, 14.000 };
+
+   std::string outputA3 = std::format("Values for QVector are: {}", vector_C);
+   REQUIRE(outputA3 == "Values for QVector are: [80.69, 9.256, 23.4257, 14]");
+
+   QString outputB3 = formatToQString("Values for QVector are: {}", vector_C);
+   REQUIRE(outputB3 == "Values for QVector are: [80.69, 9.256, 23.4257, 14]");
+
+   QString outputC3 = formatToQString("Show QVector values with padding: {:>30}", vector_C);
+   REQUIRE(outputC3 == "Show QVector values with padding:    [80.69, 9.256, 23.4257, 14]");
+}
+
 // tools
 TEST_CASE("qformat formatter-qline", "[qformat]")
 {
