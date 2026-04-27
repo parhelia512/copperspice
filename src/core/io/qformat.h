@@ -72,6 +72,36 @@ struct std::formatter<QList<T>> : std::formatter<std::string>
    }
 };
 
+template<typename T>
+struct std::formatter<QVector<T>> : std::formatter<std::string>
+{
+   // format data, delegate formatting to the base class
+   template<typename Context>
+   auto format(const QVector<T> &vector, Context &ctx) const {
+
+      bool first = true;
+
+      std::string output;
+      output.append("[");
+
+      for (const auto &item : vector) {
+
+         if (first) {
+            first = false;
+
+         } else {
+            output.append(", ");
+
+         }
+
+         output += std::format("{}", item);
+      }
+
+      output.append("]");
+
+      return std::formatter<std::string>::format(output, ctx);
+   }
+};
 
 // string types
 template<>
