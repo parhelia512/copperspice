@@ -1046,11 +1046,11 @@ bool QFtpPI::processReply()
 {
 #if defined(CS_SHOW_DEBUG_NETWORK)
    if (m_replyText.length() < 400) {
-      qDebug("QFtpPI recv: %d %s", 100 * m_replyCode[0] + 10 * m_replyCode[1] + m_replyCode[2],
+      qDebug("QFtpPI::processReply() Received: %d %s", 100 * m_replyCode[0] + 10 * m_replyCode[1] + m_replyCode[2],
             m_replyText.toLatin1().constData());
 
    } else {
-      qDebug("QFtpPI recv: %d (text skipped)", 100 * m_replyCode[0] + 10 * m_replyCode[1] + m_replyCode[2]);
+      qDebug("QFtpPI::processReply() Received: %d (text skipped)", 100 * m_replyCode[0] + 10 * m_replyCode[1] + m_replyCode[2]);
    }
 #endif
 
@@ -1135,7 +1135,7 @@ bool QFtpPI::processReply()
          // this error should be reported
 
 #if defined(CS_SHOW_DEBUG_NETWORK)
-         qDebug("QFtp: bad 227 response -- address and port information missing");
+         qDebug("QFtp::processReply() Bad 227 response, address and port information missing");
 #endif
 
       } else {
@@ -1155,7 +1155,7 @@ bool QFtpPI::processReply()
       if (portPos == -1) {
 
 #if defined(CS_SHOW_DEBUG_NETWORK)
-         qDebug("QFtp: bad 229 response, port information missing");
+         qDebug("QFtp::processReply() Bad 229 response, port information missing");
 #endif
          // this error should be reported
 
@@ -1247,7 +1247,7 @@ bool QFtpPI::startNextCmd()
 
 #if defined(CS_SHOW_DEBUG_NETWORK)
    if (state != Idle) {
-      qDebug("QFtpPI startNextCmd() Internal error, QFtpPI called in non-Idle state %d", state);
+      qDebug("QFtpPI::startNextCmd() Internal error, QFtpPI called in non-Idle state %d", state);
    }
 #endif
 
@@ -1305,7 +1305,7 @@ bool QFtpPI::startNextCmd()
    pendingCommands.pop_front();
 
 #if defined(CS_SHOW_DEBUG_NETWORK)
-   qDebug("QFtpPI send: %s", currentCmd.left(currentCmd.length() - 2).toLatin1().constData());
+   qDebug("QFtpPI::startNextCmd() Send: %s", currentCmd.left(currentCmd.length() - 2).toLatin1().constData());
 #endif
 
    state = Waiting;
